@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Product
+from .forms import ProductForm
 
 
 def index(request):
@@ -10,7 +12,9 @@ def about(request):
 
 
 def products(request):
-    return render(request, 'products.html')
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'products.html', context)
 
 
 def news(request):
@@ -19,3 +23,15 @@ def news(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('products')
+    else:
+        form = ProductForm()
+    context = {'form': form}
+    return render(request, 'add_product.html', context)
