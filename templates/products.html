@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Products</h1>
-  {% for product in products %}
-    <div class="product">
-      <h2>{{ product.name }}</h2>
-      <p>Colors: {{ product.colors }}</p>
-      <p>Packaging: {{ product.packaging }}</p>
-      <p>Category: {{ product.category }}</p>
-      <p>Description: {{ product.description }}</p>
+  <div class="container">
+    <h1>Products</h1>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Colors</th>
+            <th>Packaging</th>
+            <th>Category</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.colors }}</td>
+              <td>{{ product.packaging }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.description }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-  {% endfor %}
+  </div>
 {% endblock %}
+

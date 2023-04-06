@@ -1,6 +1,6 @@
-from django.contrib.auth import logout, authenticate, login
-from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, logout, login
+from .forms import CustomUserCreationForm, LoginForm
 
 
 def signup(request):
@@ -8,7 +8,7 @@ def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
@@ -19,8 +19,9 @@ def signup(request):
 
 
 def login_view(request):
+    form = LoginForm()
     if request.method == 'POST':
-        form = CustomAuthenticationForm(request, data=request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -28,9 +29,8 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect('dashboard')
-    else:
-        form = CustomAuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
+    context = {'form': form}
+    return render(request, 'accounts/login.html', context)
 
 
 def logout_view(request):
