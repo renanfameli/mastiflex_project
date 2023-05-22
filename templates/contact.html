@@ -1,11 +1,55 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
 {% block content %}
-    <h1>Contact Us</h1>
-    <p>Feel free to get in touch with us for any questions, inquiries or comments you may have.</p>
-    <ul>
-        <li>Email: info@mastiflex.com</li>
-        <li>Phone: +1 555 555 5555</li>
-        <li>Address: 123 Main Street, Anytown, USA</li>
-    </ul>
+<section class="form-section">
+    <h2>Contact Us</h2>
+    <form method="post" action="{% url 'contact' %}" id="contact-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="phone">Phone (optional):</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="is_b2b" name="is_b2b" onchange="toggleB2bField();">
+                    <label class="form-check-label" for="is_b2b">
+                        This is a B2B inquiry
+                    </label>
+                </div>
+                <div class="form-group b2b-field" style="display: none;">
+                    <label for="company">Company Name:</label>
+                    <input type="text" class="form-control" id="company" name="company">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="subject">Subject:</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+</section>
 {% endblock %}

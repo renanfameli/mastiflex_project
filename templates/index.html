@@ -1,34 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %}My Simple and Modern Website{% endblock %}
+{% load static %}
+
+{% block title %}Mastiflex{% endblock %}
 
 {% block content %}
 <section class="hero">
-	<h2>Welcome to My Website</h2>
+	<h2>Mastiflex</h2>
 	<p>We provide amazing services to our clients.</p>
-	<a href="#" class="btn">Learn More</a>
+	<a href="{% url 'about' %}" class="btn">Learn More</a>
 </section>
 
 <section class="services">
-	<h2>Our Services</h2>
-	<ul>
-		<li>
-			<h3>Service 1</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dolor vel erat congue tincidunt.</p>
-		</li>
-		<li>
-			<h3>Service 2</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dolor vel erat congue tincidunt.</p>
-		</li>
-		<li>
-			<h3>Service 3</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dolor vel erat congue tincidunt.</p>
-		</li>
-	</ul>
+	<h2>Our Main Products</h2>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card">
+				<img src="{% static 'img/products/default.jpg' %}" alt="Adhesive Polyurethane Sealant" class="card-img-top">
+				<div class="card-body">
+					<h3 class="card-title">Adhesive Polyurethane Sealant</h3>
+					<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dolor vel erat congue tincidunt.</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card">
+				<img src="{% static 'img/products/default.jpg' %}" alt="Butyl Tapes" class="card-img-top">
+				<div class="card-body">
+					<h3 class="card-title">Butyl Tapes</h3>
+					<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dolor vel erat congue tincidunt.</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
-
 <section class="about">
 	<h2>About Us</h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dolor vel erat congue tincidunt. Sed vitae magna euismod, aliquam turpis non, laoreet ex. Duis consequat, nisl a molestie fermentum, mauris ex aliquet lectus, eget volutpat lectus dolor eu sapien. Sed vitae odio nec quam vestibulum hendrerit. Aliquam erat volutpat. Nam rhoncus sit amet enim eu hendrerit. Donec vel dolor lorem.</p>
+	<a href="{% url 'contact' %}" class="btn">Contact Us</a>
 </section>
 {% endblock %}

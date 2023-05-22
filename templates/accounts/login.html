@@ -1,17 +1,29 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
 {% block content %}
+<section class="form-section">
   <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
-    <div>
-      {{ form.username.label_tag }}
-      {{ form.username }}
+    <div class="form-group">
+      <label for="{{ form.username.auto_id }}">Username:</label>
+      <input type="text" class="form-control" id="{{ form.username.auto_id }}" name="{{ form.username.html_name }}" required>
     </div>
-    <div>
-      {{ form.password.label_tag }}
-      {{ form.password }}
+    <div class="form-group">
+      <label for="{{ form.password.auto_id }}">Password:</label>
+      <input type="password" class="form-control" id="{{ form.password.auto_id }}" name="{{ form.password.html_name }}" required>
     </div>
-    <button type="submit">Login</button>
+    <button type="submit" class="btn btn-primary">Login</button>
   </form>
+  <div class="auth-alternatives">
+    <p>or login with:</p>
+    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-primary">
+      <i class="fab fa-google"></i> Google
+    </a>
+  </div>
+</section>
 {% endblock %}

@@ -1,0 +1,390 @@
+// 1
+// SCSS Variables
+$color-primary: #2F6EA7;
+$color-secondary: #EE4150;
+$color-white: #F5F5F5;
+$color-gray-light: #D3D3D3;
+$color-gray-medium: #BEBEBE;
+$color-gray-dark: #A9A9A9;
+$color-text: #333;
+$color-bg: $color-gray-light;
+$color-gray: #777;
+$color-bg-menu: rgba(255, 255, 255, 0.8);
+
+// Fonts
+$font-family: 'Inter', sans-serif; // Updated font
+
+// Font sizes
+$font-size-base: 1rem;
+$font-size-h1: 3rem;
+$font-size-h2: 2rem;
+$font-size-h3: 1.5rem;
+$font-size-h4: 1.25rem;
+$font-size-h5: 1rem;
+$font-size-h6: 0.875rem;
+
+// Spacing
+$spacing-base: 1rem;
+$spacing-half: 0.5rem;
+$spacing-double: 2rem;
+$height-header: 4rem;
+
+// Mixins
+@mixin box-shadow($color) {
+  box-shadow: 0 1px 3px 0 rgba($color, 0.2);
+}
+
+@mixin transition($properties...) {
+  transition: $properties;
+  -webkit-transition: $properties;
+  -moz-transition: $properties;
+  -o-transition: $properties;
+}
+
+@mixin input-style {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid $color-gray-medium;
+  padding: 0.5rem 1rem;
+  font-size: $font-size-base;
+  @include transition(border-color 0.3s, box-shadow 0.3s);
+
+  &:focus {
+    border-color: $color-primary;
+    @include box-shadow(rgba($color-primary, 0.2));
+  }
+}
+
+// Additional mixin for responsive breakpoints
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-portrait {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-landscape {
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
+
+// 2
+// Global styles
+html {
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: 1.5em;
+  color: $color-text;
+  background-color: $color-bg;
+}
+
+// Normalize anchor tag styles
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+// Header styles
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-base;
+  background-color: $color-primary;
+  color: $color-white;
+  position: fixed; // Make the header sticky
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  background-color: $color-white;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  margin-left: $spacing-half;
+  margin-right: $spacing-half;
+  text-align: center;
+}
+
+nav a {
+  color: $color-white;
+  text-decoration: none;
+  @include transition(color 0.3s);
+}
+
+nav a:hover,
+nav a:focus {
+  color: $color-secondary;
+}
+
+nav .dropdown-menu {
+  background-color: $color-white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: $spacing-base;
+  margin-top: 0.25rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2);
+}
+
+nav .dropdown-menu a {
+  text-decoration: none;
+  @include transition(color 0.3s);
+
+  &:hover,
+  &:focus {
+    color: $color-secondary;
+  }
+}
+
+.navbar-collapse {
+  background-color: $color-bg-menu;
+}
+
+.logo {
+  height: 3rem;
+  width: auto;
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.search-bar {
+  width: 20rem;
+  height: 2.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid $color-gray;
+  padding: 0.5rem $spacing-base;
+  font-size: 1rem;
+  margin-left: $spacing-base;
+  @include transition(border-color 0.3s, box-shadow 0.3s);
+}
+
+.search-bar:focus {
+  border-color: $color-primary;
+  @include box-shadow(rgba($color-primary, 0.2));
+}
+
+.search-btn {
+  background-color: $color-secondary;
+  border: none;
+  border-radius: 0.25rem;
+  color: $color-white;
+  font-size: $font-size-base;
+  padding: 0.5rem $spacing-base;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  @include transition(background-color 0.3s, color 0.3s);
+}
+
+.search-btn:hover,
+.search-btn:focus {
+  background-color: $color-secondary;
+}
+
+// 3
+// Main content styles
+.main-content {
+  flex-grow: 1;
+  padding: $spacing-base;
+  margin-top: 4rem; // Adjust the margin-top value according to the height of your fixed header
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-base;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -$spacing-half;
+}
+
+.row::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: $spacing-half;
+}
+
+// Responsive grid system
+@include media-breakpoint-down(sm) {
+  .col-sm {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .col-md {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .col-lg {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .col-xl {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+// Buttons
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  @include transition(color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out);
+}
+
+.btn-primary {
+  color: $color-white;
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
+
+.btn-primary:hover {
+  color: $color-white;
+  background-color: darken($color-primary, 10%);
+  border-color: darken($color-primary, 10%);
+}
+
+// 4
+// Footer styles
+.site-footer {
+  background-color: $color-primary;
+  color: $color-white;
+  padding: $spacing-base;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: $spacing-base;
+  margin-bottom: $spacing-base;
+}
+
+.footer-item {
+  flex: 1;
+  padding: $spacing-base;
+  max-width: 25%;
+}
+
+.footer-item h4 {
+  font-size: $font-size-h4;
+  margin-bottom: $spacing-half;
+}
+
+.footer-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-item li {
+  margin-bottom: $spacing-half;
+}
+
+.footer-item a {
+  color: $color-white;
+  text-decoration: none;
+  @include transition(color 0.3s);
+
+  &:hover,
+  &:focus {
+    color: $color-secondary;
+  }
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-item {
+    max-width: 100%;
+    margin-bottom: $spacing-base;
+  }
+
+  .footer-item:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,10 +1,37 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
 {% block content %}
-  <h2>Sign up</h2>
+<section class="form-section">
+  <h2>Sign Up</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
+    <div class="form-group">
+      <label for="{{ form.username.auto_id }}">Username:</label>
+      <input type="text" class="form-control" id="{{ form.username.auto_id }}" name="{{ form.username.html_name }}" required>
+    </div>
+    <div class="form-group">
+      <label for="{{ form.email.auto_id }}">Email:</label>
+      <input type="email" class="form-control" id="{{ form.email.auto_id }}" name="{{ form.email.html_name }}" required>
+    </div>
+    <div class="form-group">
+      <label for="{{ form.password1.auto_id }}">Password:</label>
+      <input type="password" class="form-control" id="{{ form.password1.auto_id }}" name="{{ form.password1.html_name }}" required>
+    </div>
+    <div class="form-group">
+      <label for="{{ form.password2.auto_id }}">Confirm Password:</label>
+      <input type="password" class="form-control" id="{{ form.password2.auto_id }}" name="{{ form.password2.html_name }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
   </form>
+  <div class="auth-alternatives">
+    <p>or sign up with:</p>
+    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-primary">
+      <i class="fab fa-google"></i> Google
+    </a>
+  </div>
+</section>
 {% endblock %}
